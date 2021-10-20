@@ -4,10 +4,10 @@ import { Field, InputType } from '@nestjs/graphql';
 export class UpdateUserDto {
   @Field()
   _id: string;
-  @Field()
-  userName: string;
-  @Field()
-  email: string;
-  @Field()
-  password: string;
+  @Field({ nullable: true })
+  userName?: string;
+  @Field({ nullable: true })
+  email?: string;
+  @Field({ nullable: true })
+  password?: string;
 }

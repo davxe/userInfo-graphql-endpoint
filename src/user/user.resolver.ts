@@ -31,8 +31,8 @@ export class UserResolver {
     return this.userService.deleteUser(id);
   }
 
-  @Mutation(() => GetUsersDto, { name: 'Update_Users', nullable: true })
-  update(@Args('input') id: UpdateUserDto): Promise<IUser> {
-    return this.userService.updateUser(id);
+  @Mutation(() => GetUsersDto, { name: 'Update_Users' })
+  update(@Args('input') body: UpdateUserDto): Promise<IUser> {
+    return this.userService.updateUser(body);
   }
 }

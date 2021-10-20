@@ -12,23 +12,22 @@ export class UserService {
     return await this.userModel.find();
   }
 
-  async listUserBasedOnId(id: any): Promise<IUser> {
-    return await this.userModel.findOne({ _id: id });
+  async listUserBasedOnId(body: GetUserByIdDto): Promise<IUser> {
+    return await this.userModel.findOne({ _id: body._id });
   }
 
   async createUser(body: IUser): Promise<IUser> {
-    const newUser = new this.userModel(body);
+    const newUser = new this.userModel({ ...body });
     await newUser.save();
     return newUser;
   }
 
-  async deleteUser(id: GetUserByIdDto): Promise<IUser> {
-    return await this.userModel.findByIdAndDelete(id);
+  async deleteUser(body: GetUserByIdDto): Promise<IUser> {
+    return await this.userModel.findByIdAndDelete(body._id);
   }
 
-  async updateUser(id: UpdateUserDto): Promise<IUser> {
-    console.log('id', id);
-    return await this.userModel.findByIdAndUpdate(id, {
+  async updateUser(body: UpdateUserDto): Promise<IUser> {
+    return await this.userModel.findByIdAndUpdate(body._id, body, {
       new: true,
     });
   }
